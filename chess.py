@@ -46,4 +46,6 @@ for x in range(8):
         ax.add_patch(cil)
 cil = plt.Circle((a, b), 0.42, color='#2c3047')
 ax.add_patch(cil)
+plt.xticks(range(8), labels=[f"{chr(i)}" for i in range(65, 65+8)])
+plt.yticks(range(8), labels=[f"{i}" for i in range(8, 0, -1)])
 plt.show()
