@@ -16,6 +16,7 @@ m = []
 cnt1 = 0
 cnt2 = 0
 mxcnt2 = 0
+r = 0
 x = []
 y = []
 for i in range(365):
@@ -28,21 +29,32 @@ for i in range(365):
     if(now < 0):
         cnt2 += 1
     else:
-        mxcnt2 = max(mxcnt2, cnt2)
+        if(cnt2 > mxcnt2):
+            r = i+1
+            mxcnt2 = cnt2
         cnt2 = 0
 cr = sum(m) / len(m)
-print(cr, cnt1, mxcnt2)
+print("Средняя температура за год:", cr)
+print("Количество дней с температурой выше 25:", cnt1)
+print("Самая длинная последовательность дней, когда температура была ниже 0:")
+print(chr(9), "Длина этой последовательности:", mxcnt2)
+print(chr(9), "Номера крайних дней:", r - mxcnt2 + 1, r)
 
 fig = plt.figure(figsize=(12, 7))
-ax = plt.subplot(2, 1, 1)
+ax = plt.subplot(3, 1, 1)
 plt.plot(x, y)
 
-plt.xlabel("День")
-plt.ylabel("Температура")
-
-ax = plt.subplot(2, 1, 2)
+ax = plt.subplot(3, 1, 2)
 
 plt.bar(x, y, color='#5da38f')
+
+ax = plt.subplot(3, 1, 3)
+
+cmap = plt.get_cmap('viridis')
+norm = plt.Normalize(-10, 35)
+line_colors = cmap(norm(y))
+plt.scatter(x, y, color=line_colors)
+
 
 plt.show()
 
